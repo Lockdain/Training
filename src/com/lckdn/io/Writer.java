@@ -2,14 +2,10 @@ package com.lckdn.io;
 
 import com.lckdn.io.collections.AverageStudentGrade;
 
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.Formatter;
-import java.util.InputMismatchException;
-import java.util.Map;
-import java.util.Scanner;
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.*;
 
 public class Writer {
     public void writeWithFormatter(String fileName) throws FileNotFoundException {
@@ -38,5 +34,16 @@ public class Writer {
             }
             writer.flush();
         }
+    }
+
+    public void writeObject(List<Student> students, String fileName) {
+       try (ObjectOutputStream out = new ObjectOutputStream(Files.newOutputStream(Paths.get(fileName)))) {
+           for (Student student : students) {
+               out.writeObject(student);
+           }
+       } catch (IOException e) {
+           System.out.println("File cannot be opened. Exiting.");
+           e.printStackTrace();
+       }
     }
 }

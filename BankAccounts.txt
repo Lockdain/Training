@@ -1,3 +1,0 @@
-1, Alex, Sergeenko
-2, Alex, Chup
-3, Lex, Luthor
