@@ -4,7 +4,10 @@ import com.lckdn.io.collections.AverageStudentGrade;
 import com.lckdn.io.collections.IOHelper;
 
 import java.io.*;
+import java.util.Formatter;
+import java.util.InputMismatchException;
 import java.util.Map;
+import java.util.Scanner;
 
 public class IOMain {
 
@@ -13,17 +16,24 @@ public class IOMain {
 
     public static void main(String[] args) throws IOException {
         Map<String, AverageStudentGrade> grades = IOHelper.createGrades();
-        writeFile(grades);
-        readFile();
+//        writeFile(grades);
+//        readFile();
 
-        try (FileInputStream reader = new FileInputStream(GRADE_BOOK_TXT); FileOutputStream writer = new FileOutputStream(GRADE_BOOK_BYTE_TXT)) {
+        Formatter formatter = new Formatter("BankAccounts.txt");
+        Scanner scanner = new Scanner(System.in);
 
-            int c;
-            while ((c = reader.read()) != -1) {
-                System.out.println(c);
-                writer.write(c);
+        int i = 0;
+        System.out.println("Insert your clientId, clientName and surname:");
+        while (i < 3) {
+            try {
+                formatter.format("%d, %s, %s", scanner.nextInt(), scanner.next(), scanner.next() + "\n");
+                i++;
+            } catch (InputMismatchException e) {
+                System.out.println("Input was incorrect. Try again!");
+                scanner.nextLine();
             }
         }
+        formatter.close();
     }
 
     private static void readFile() throws IOException {

@@ -1,0 +1,3 @@
+1, Alex, Sergeenko
+2, Max, Shell
+3, Ivan, True
