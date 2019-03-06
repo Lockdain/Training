@@ -9,11 +9,13 @@ public class IOHelper {
     public static HashMap<String, AverageStudentGrade> createGrades() {
         HashMap<String, AverageStudentGrade> grades = new HashMap<String, AverageStudentGrade>();
 
-        grades.put("1", new AverageStudentGrade("Alex" , 5));
-        grades.put("2", new AverageStudentGrade("John" , 3));
-        grades.put("3", new AverageStudentGrade("Mary" , 2));
-        grades.put("4", new AverageStudentGrade("Jennifer" , 4));
-        grades.put("5", new AverageStudentGrade("Luthor" , 5));
+        grades.put("1", new AverageStudentGrade("Alex" , 65));
+        grades.put("2", new AverageStudentGrade("John" , 70));
+        grades.put("3", new AverageStudentGrade("Mary" , 82));
+        grades.put("4", new AverageStudentGrade("Jennifer" , 74));
+        grades.put("5", new AverageStudentGrade("Luthor" , 65));
+        grades.put("6", new AverageStudentGrade("Mike" , 95));
+        grades.put("7", new AverageStudentGrade("Ken" , 75));
 
         return grades;
     }

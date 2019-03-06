@@ -16,7 +16,7 @@ public class IOMain {
         Map<String, AverageStudentGrade> grades = IOHelper.createGrades();
         // read file
         Reader reader = new Reader();
-        reader.readFile(Constants.GRADE_BOOK_TXT);
+//        reader.readFile(Constants.GRADE_BOOK_TXT);
 
         // write file
         Writer writer = new Writer();
@@ -24,7 +24,7 @@ public class IOMain {
 //        writer.writeWithFormatter(Constants.BANK_ACCOUNTS__TXT);
 
         processGrades(grades, writer, STUDENTS_BIN);
-
+        outputObjects(reader, STUDENTS_BIN);
     }
 
     private static void processGrades(Map<String, AverageStudentGrade> grades, Writer writer, String fileName) {
@@ -35,6 +35,14 @@ public class IOMain {
         }
 
         writer.writeObject(students, fileName);
+    }
+
+    private static void outputObjects(Reader reader, String fileName) {
+        List<Student> students = reader.readObject(fileName);
+
+        for (Student student : students) {
+            System.out.printf("%s, %.2f %n", student.getName(), student.getAverageGrade());
+        }
     }
 
 }

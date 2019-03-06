@@ -1,8 +1,10 @@
 package com.lckdn.io;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Reader {
 
@@ -12,5 +14,27 @@ public class Reader {
         while ((s = reader.readLine()) != null) {
             System.out.println(s);
         }
+    }
+
+    public List<Student> readObject(String fileName) {
+        List<Student> students = new ArrayList<>();
+        try (ObjectInputStream in = new ObjectInputStream(Files.newInputStream(Paths.get(fileName)))) {
+            boolean keepReading = true;
+            while (keepReading) {
+                Student student = (Student) in.readObject();
+                if (!"".equals(student.getName())) {
+                    students.add(student);
+                } else {
+                    keepReading = false;
+                }
+            }
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (EOFException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return students;
     }
 }
