@@ -23,8 +23,12 @@ public class IOMain {
 //        writer.writeFile(grades, Constants.GRADE_BOOK_TXT);
 //        writer.writeWithFormatter(Constants.BANK_ACCOUNTS__TXT);
 
-        processGrades(grades, writer, STUDENTS_BIN);
-        outputObjects(reader, STUDENTS_BIN);
+//        processGrades(grades, writer, STUDENTS_BIN);
+//        outputObjects(reader, STUDENTS_BIN);
+
+        FileUtils fileUtils = new FileUtils();
+        fileUtils.printIOFileDetails("./");
+
     }
 
     private static void processGrades(Map<String, AverageStudentGrade> grades, Writer writer, String fileName) {
