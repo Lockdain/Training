@@ -12,6 +12,7 @@ public class IOMain {
 
     public static final String STUDENTS_BIN = "Students.bin";
     public static final String WORDS_TXT = "words.txt";
+    public static final String BUFFERED_FILE = "buffered.txt";
 
     public static void main(String[] args) throws IOException {
         Map<String, AverageStudentGrade> grades = IOHelper.createGrades();
@@ -31,7 +32,11 @@ public class IOMain {
         FileUtils fileUtils = new FileUtils();
 //        fileUtils.printIOFileDetails("./");
 //        fileUtils.printNioFileDetails(STUDENTS_BIN);
-        reader.readFullFile(WORDS_TXT);
+//        reader.readFullFile(WORDS_TXT);
+//        reader.nioReadFileWithBuffer(WORDS_TXT);
+//        writer.nioWriteWithBuffer(BUFFERED_FILE);
+//        reader.nioReadFileWithBuffer(WORDS_TXT);
+        writer.nioWriteWithStream(BUFFERED_FILE);
     }
 
     private static void processGrades(Map<String, AverageStudentGrade> grades, Writer writer, String fileName) {

@@ -1,6 +1,7 @@
 package com.lckdn.io;
 
 import java.io.*;
+import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -46,4 +47,28 @@ public class Reader {
             System.out.println(s);
         }
     }
+
+    public void nioReadFileWithBuffer(String fileName) throws IOException {
+        Path path = Paths.get(fileName);
+        Charset charset = Charset.forName("UTF-8");
+        try (BufferedReader reader = Files.newBufferedReader(path, charset)) {
+            String s;
+            while ((s = reader.readLine()) != null) {
+                System.out.println(s);
+            }
+        }
+    }
+
+    public void nioReaderWithStream(String fileName) throws IOException {
+        Path path = Paths.get(fileName);
+        try (InputStream in = Files.newInputStream(path)) {
+            BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+            String s;
+            while ((s = reader.readLine()) != null) {
+                System.out.println(s);
+            }
+        }
+    }
+
+
 }
