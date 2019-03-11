@@ -1,9 +1,7 @@
 package com.lckdn.io;
 
-import java.io.BufferedInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
+import java.io.*;
+import java.nio.file.*;
 
 public class FileUtils {
 
@@ -42,5 +40,38 @@ public class FileUtils {
 //            FileInputStream in = new FileInputStream(file);
 //            BufferedInputStream inputStream = new BufferedInputStream(new FileInputStream(file));
         }
+    }
+
+    public void printNioFileDetails(String fileName) throws IOException {
+        Path path = Paths.get(fileName);
+        Path path1 = FileSystems.getDefault().getPath(fileName);
+
+        System.out.println("File name: " + path.getFileName());
+        Path absPath = path.toAbsolutePath();
+        System.out.println("Absolute path: " + absPath);
+        System.out.println("Root dir: " + absPath.getRoot());
+        System.out.println("Parent dir: " + absPath.getParent());
+        System.out.println("Name count: " + path.getNameCount());
+        System.out.println("Subpath: " + absPath.subpath(0, 2));
+        Path path3 = Paths.get("../../");
+        System.out.println("Real path: " + path3.toRealPath());
+
+        System.out.println("File exists: " + Files.exists(path));
+        System.out.println("File doesn't exist: " + Files.notExists(path));
+
+        System.out.println("Is readable: " + Files.isReadable(path));
+        System.out.println("Is writable: " + Files.isWritable(path));
+        System.out.println("Is executable: " + Files.isExecutable(path));
+
+        System.out.println("Is same file: " + Files.isSameFile(path, path1));
+
+        Path parentPath = absPath.getParent();
+        Path filesPath = parentPath.resolve("files");
+
+        if (Files.notExists(filesPath)) {
+            Files.createDirectory(filesPath);
+        }
+        Files.copy(absPath, filesPath.resolve(path), StandardCopyOption.REPLACE_EXISTING);
+        Files.delete(filesPath);
     }
 }
