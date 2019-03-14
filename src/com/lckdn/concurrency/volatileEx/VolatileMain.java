@@ -5,7 +5,7 @@ import static com.lckdn.concurrency.ColorScheme.RED;
 
 public class VolatileMain {
 
-    private static volatile int counter;
+    private static int counter;
     private static int x;
     private static int y;
 

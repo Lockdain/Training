@@ -1,6 +1,8 @@
 package com.lckdn.io;
 
 import java.io.*;
+import java.nio.ByteBuffer;
+import java.nio.channels.FileChannel;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -70,5 +72,22 @@ public class Reader {
         }
     }
 
+    public void nioReadWithChannel(String fileName) throws IOException {
+        RandomAccessFile file = new RandomAccessFile(fileName, "rw");
+        FileChannel channel = file.getChannel();
 
+        ByteBuffer buffer = ByteBuffer.allocate(100);
+        int bytesNumber = channel.read(buffer);
+
+        while (bytesNumber > 0) {
+            buffer.flip();
+            while (buffer.hasRemaining()) {
+                char b = (char) buffer.get();
+                System.out.print(b);
+            }
+            buffer.clear();
+            bytesNumber = channel.read(buffer);
+        }
+        channel.close();
+    }
 }

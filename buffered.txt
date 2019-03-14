@@ -1,0 +1,1 @@
+You can also create a new file by using the newOutputStream methods as described in Creating and writing a File using Stream I/O. If you open a new output stream and close it immediately, an empty file is created.
