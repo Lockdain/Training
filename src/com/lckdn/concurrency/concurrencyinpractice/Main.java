@@ -5,15 +5,19 @@ import net.jcip.annotations.NotThreadSafe;
 @NotThreadSafe
 public class Main {
 
+    // Количество миллисекунд задержки при вызове в цикде
     public static final int TIME = 1;
+
+    // Количество выполнений цикла в каждом потоке
     public static final int QTY = 10;
+
     private volatile long value;
 
     public long getValue() {
         return value;
     }
 
-    // Returns unique value
+    // Возвращает инкрементированное значение
     public synchronized long getNext() {
         return value++;
     }
@@ -21,83 +25,41 @@ public class Main {
 
 class Test {
     public static void main(String[] args) throws InterruptedException {
+        // Создаём общий экземпляр Main для всех потоков
         Main main = new Main();
-        ThreadA th1 = new ThreadA(main);
-        ThreadB th2 = new ThreadB(main);
-        ThreadC th3 = new ThreadC(main);
+
+        // Создаём потоки
+        TestThread th1 = new TestThread(main, "A");
+        TestThread th2 = new TestThread(main, "B");
+        TestThread th3 = new TestThread(main, "C");
+
+        // Запускаем потоки
         th1.start();
         th2.start();
         th3.start();
     }
 }
 
-class ThreadA extends Thread {
-
+class TestThread extends Thread {
     Main main;
+    String threadName;
 
-    public ThreadA(Main main) {
+    public TestThread(Main main, String threadName) {
         this.main = main;
+        this.threadName = threadName;
     }
 
     @Override
     public void run() {
-        for (int i = 0; i <= Main.QTY; i++) {
-            System.out.println("A: " +  main.getNext());
+        for (int i = 1; i <= Main.QTY; i++) {
+            System.out.println(i + ". " + threadName + ": " + main.getNext());
             try {
                 Thread.sleep(Main.TIME);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
             if (i == Main.QTY) {
-                System.out.println("Last cycle of A");
-            }
-        }
-    }
-}
-
-class ThreadB extends Thread {
-
-    Main main;
-
-    public ThreadB(Main main) {
-        this.main = main;
-    }
-
-    @Override
-    public void run() {
-        for (int i = 0; i <= Main.QTY; i++) {
-            System.out.println("B: " +  main.getNext());
-            try {
-                Thread.sleep(Main.TIME);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            if (i == Main.QTY) {
-                System.out.println("Last cycle of B");
-            }
-        }
-    }
-}
-
-class ThreadC extends Thread {
-
-    Main main;
-
-    public ThreadC(Main main) {
-        this.main = main;
-    }
-
-    @Override
-    public void run() {
-        for (int i = 0; i <= Main.QTY; i++) {
-            System.out.println("C: " + main.getNext());
-            try {
-                Thread.sleep(Main.TIME);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            if (i == Main.QTY) {
-                System.out.println("Last cycle of C");
+                System.out.println("Last cycle of " + threadName);
             }
         }
     }
