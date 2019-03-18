@@ -6,7 +6,7 @@ import net.jcip.annotations.NotThreadSafe;
 public class Main {
 
     // Количество миллисекунд задержки при вызове в цикде
-    public static final int TIME = 1;
+    public static final int TIME = 1000;
 
     // Количество выполнений цикла в каждом потоке
     public static final int QTY = 10;
@@ -53,14 +53,18 @@ class TestThread extends Thread {
     public void run() {
         for (int i = 1; i <= Main.QTY; i++) {
             System.out.println(i + ". " + threadName + ": " + main.getNext());
-            try {
-                Thread.sleep(Main.TIME);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+            sleep(Main.TIME);
             if (i == Main.QTY) {
                 System.out.println("Last cycle of " + threadName);
             }
+        }
+    }
+
+    private void sleep(int timeMs) {
+        try {
+            Thread.sleep(timeMs);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
     }
 }
