@@ -5,13 +5,13 @@ import net.jcip.annotations.NotThreadSafe;
 @NotThreadSafe
 public class Main {
 
-    // Количество миллисекунд задержки при вызове в цикле
-    public static final int TIME = 1000;
+    // Количество миллисекунд задержки при вызове в цикде
+    public static final int TIME = 1;
 
     // Количество выполнений цикла в каждом потоке
     public static final int QTY = 10;
 
-    private long value = 1;
+    private volatile long value;
 
     public long getValue() {
         return value;
@@ -41,7 +41,6 @@ class Test {
 }
 
 class TestThread extends Thread {
-
     Main main;
     String threadName;
 
@@ -60,8 +59,7 @@ class TestThread extends Thread {
                 e.printStackTrace();
             }
             if (i == Main.QTY) {
-                // Информируем о том, что данная итерация - последняя
-                System.out.println("Last cycle of: " + threadName + " Target value is: " + main.getValue());
+                System.out.println("Last cycle of " + threadName);
             }
         }
     }
