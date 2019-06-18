@@ -1,8 +1,8 @@
 package com.lckdn.concurrency.concurrencyinpractice;
 
-import net.jcip.annotations.NotThreadSafe;
+//import net.jcip.annotations.NotThreadSafe;
 
-@NotThreadSafe
+//@NotThreadSafe
 public class Main {
 
     // Количество миллисекунд задержки при вызове в цикде

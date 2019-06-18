@@ -8,10 +8,25 @@ public class Main {
     public static final Object lock = new Object();
 
     public static void main(String[] args) throws InterruptedException {
-        SimpleThreadA thA = new SimpleThreadA();
-        SimpleThreadB thB = new SimpleThreadB();
-        thA.start();
-        thB.start();
+//        SimpleThreadA thA = new SimpleThreadA();
+//        SimpleThreadB thB = new SimpleThreadB();
+//        thA.start();
+//        thB.start();
+
+
+
+        Integer a = Integer.valueOf(10);
+        Integer b = 10;
+        System.out.println(a == b);
+
+    }
+
+    private void run() {
+        try {
+            run();
+        } finally {
+            run();
+        }
     }
 }
 
@@ -55,5 +70,21 @@ class SimpleThreadB extends Thread {
                 e.printStackTrace();
             }
         }
+    }
+}
+
+
+class Base {
+    void foo() {
+        System.out.println("Zalo");
+    }
+}
+class Derived extends Base {
+    void foo() {}
+}
+class Main1 {
+    public static void main(String args[]) {
+        Derived d = new Derived();
+        d.foo();
     }
 }
