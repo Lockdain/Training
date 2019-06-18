@@ -44,7 +44,7 @@ public class LambdaExample {
             intList.add(i);
         }
 
-//        List<Double> doubleList = new ArrayList<>();
+//        List<Double> doubleList = new ArrayListTest<>();
 //        doubleList.add(6.4);
 //        doubleList.add(8.6);
 //        doubleList.add(1.23);
