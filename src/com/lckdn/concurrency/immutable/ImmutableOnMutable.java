@@ -19,6 +19,6 @@ public final class ImmutableOnMutable {
 
     public static void main(String[] args) {
         ImmutableOnMutable immutableOnMutable = new ImmutableOnMutable();
-        immutableOnMutable.names.
+//        immutableOnMutable.names.
     }
 }
